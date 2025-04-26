@@ -130,6 +130,14 @@ export async function POST(
     
     const latestVolley = latestVolleyResponse.data;
     
+    // Check if latestVolley exists
+    if (!latestVolley) {
+      return NextResponse.json(
+        { error: 'Latest volley data not found' },
+        { status: 500 }
+      );
+    }
+    
     // Check if the current user already completed the latest volley
     if (latestVolley.user_id === userId) {
       return NextResponse.json(
